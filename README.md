@@ -1,34 +1,56 @@
 # OsNationalGrid
 
-TODO: Delete this and the text below, and describe your gem
+[![Gem Version](https://badge.fury.io/rb/os_national_grid.svg)](https://badge.fury.io/rb/os_national_grid)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/os_national_grid`. To experiment with that code, run `bin/console` for an interactive prompt.
+**OsNationalGrid** is a Ruby gem that provides accurate transformations between the [Ordnance Survey National Grid (OSGB36)](https://www.ordnancesurvey.co.uk/documents/resources/guide-coordinate-systems-great-britain.pdf) and WGS84 (latitude/longitude) coordinate systems.
+
+It uses the official mathematical transformations from the Ordnance Survey, including a Helmert transformation for precise conversions between coordinate systems.
+
+---
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add to your Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```ruby
+gem 'os_national_grid'
+```
+Then install:
 
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+Or install it manually:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+gem install os_national_grid
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Convert from OSGB36 (easting, northing) to WGS84 (longitude, latitude)
+
+```bash
+lng, lat = OsNationalGrid.os_ng_to_wgs84(481_987.066, 213_552.27)
+
+=> [-0.812036, 51.814605]
+```
+
+### Convert from WGS84 (longitude, latitude) to OSGB36 (easting, northing)
+```bash
+easting, northing = OsNationalGrid.wgs84_to_os_ng(-0.812036, 51.814605)
+
+=> [481987.066, 213552.27]
+```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Run the test suite with:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```bash
+bundle exec rake test
+```
 
 ## License
 
